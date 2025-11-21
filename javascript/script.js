@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.setX(this.getSpeed())
             }
 
-            if (this.getDirection() === 0 && (this.getX() >= (larguraCanva - this.getTamnhoDoObservador()))) {
+            if (this.getDirection() === 0 && (this.getX() > (larguraCanva - this.getTamnhoDoObservador()))) {
                 this.setDirection(1)
             }
 
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.setDirection(0)
             }
 
-            if (this.getDirection() === 2 && (this.getY() > 0)) {
+            if (this.getDirection() === 2 && (this.getY() >= 0)) {
                 this.setY(-this.getSpeed())
             }
 
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.setY(this.getSpeed())
             }
 
-            if (this.getDirection() === 3 && (this.getY() >= (alturaCanva - this.getTamnhoDoObservador()))) {
+            if (this.getDirection() === 3 && (this.getY() > (alturaCanva - this.getTamnhoDoObservador()))) {
                 this.setDirection(2)
             }
 
