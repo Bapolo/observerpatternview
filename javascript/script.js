@@ -103,38 +103,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         correr() {
-            if (this.getDirection() == 0 && (this.getX() < (larguraCanva - this.getTamnhoDoObservador()))) {
-                this.setX(this.getSpeed())
+            if (this.direction === 0) {
+                this.setX(this.speed);
+                if (this.getX() + this.getTamnhoDoObservador() >= larguraCanva) {
+                    this.direction = 1;
+                }
             }
 
-            if (this.getDirection() == 0 && (this.getX() > (larguraCanva - this.getTamnhoDoObservador()))) {
-                this.setDirection(1)
+            else if (this.direction === 1) {
+                this.setX(-this.speed);
+                if (this.getX() <= 0) {
+                    this.direction = 0;
+                }
             }
 
-            if (this.direction == 1 && (this.getX() > 0)) {
-                this.setX(-this.getSpeed())
+            else if (this.direction === 2) {
+                this.setY(-this.speed);
+                if (this.getY() <= 0) {
+                    this.direction = 3;
+                }
             }
 
-            if (this.getDirection() == 1 && (this.getX() <= 0)) {
-                this.setDirection(0)
+            else if (this.direction === 3) {
+                this.setY(this.speed);
+                if (this.getY() + this.getTamnhoDoObservador() >= alturaCanva) {
+                    this.direction = 2;
+                }
             }
-
-            if (this.getDirection() == 2 && (this.getY() >= 0)) {
-                this.setY(-this.getSpeed())
-            }
-
-            if (this.getDirection() == 2 && (this.getY() <= 0)) {
-                this.setDirection(3)
-            }
-
-            if (this.getDirection() == 3 && (this.getY() < (alturaCanva - this.getTamnhoDoObservador()))) {
-                this.setY(this.getSpeed())
-            }
-
-            if (this.getDirection() == 3 && (this.getY() > (alturaCanva - this.getTamnhoDoObservador()))) {
-                this.setDirection(2)
-            }
-
         }
 
     }
@@ -158,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function draw() {
         const listaObservadores = [...objectoObservado.getObservadores()]
 
-        if (listaObservadores) {
+        if (listaObservadores.length > 0) {
 
             context.clearRect(0, 0, canvas.width, canvas.height)
 
