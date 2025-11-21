@@ -135,8 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 this.setDirection(2)
             }
 
-            console.log(larguraCanva - this.getTamnhoDoObservador())
-
         }
 
     }
@@ -158,17 +156,18 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     function draw() {
-        const observadores = objectoObservado.getObservadores()
+        const listaObservadores = [...objectoObservado.getObservadores()]
 
-        if (observadores.length >= 0) {
+        if (listaObservadores) {
+
             context.clearRect(0, 0, canvas.width, canvas.height)
 
-            for (let contador = 0; contador < (observadores.length); contador++) {
+            listaObservadores.forEach((observador) => {
                 context.beginPath()
-                context.rect(observadores[contador].getX(), parseInt(observadores[contador].getY()), 20, 20)
-                context.fillStyle = observadores[contador].cor
+                context.rect(observador.getX(), parseInt(observador.getY()), 20, 20)
+                context.fillStyle = observador.cor
                 context.fill()
-            }
+            })
         }
 
         window.requestAnimationFrame(draw)
