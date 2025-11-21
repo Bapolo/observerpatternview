@@ -103,35 +103,35 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         correr() {
-            if (this.getDirection() === 0 && (this.getX() < (larguraCanva - this.getTamnhoDoObservador()))) {
+            if (this.getDirection() == 0 && (this.getX() < (larguraCanva - this.getTamnhoDoObservador()))) {
                 this.setX(this.getSpeed())
             }
 
-            if (this.getDirection() === 0 && (this.getX() > (larguraCanva - this.getTamnhoDoObservador()))) {
+            if (this.getDirection() == 0 && (this.getX() > (larguraCanva - this.getTamnhoDoObservador()))) {
                 this.setDirection(1)
             }
 
-            if (this.direction === 1 && (this.getX() > 0)) {
+            if (this.direction == 1 && (this.getX() > 0)) {
                 this.setX(-this.getSpeed())
             }
 
-            if (this.getDirection() === 1 && (this.getX() <= 0)) {
+            if (this.getDirection() == 1 && (this.getX() <= 0)) {
                 this.setDirection(0)
             }
 
-            if (this.getDirection() === 2 && (this.getY() >= 0)) {
+            if (this.getDirection() == 2 && (this.getY() >= 0)) {
                 this.setY(-this.getSpeed())
             }
 
-            if (this.getDirection() === 2 && (this.getY() <= 0)) {
+            if (this.getDirection() == 2 && (this.getY() <= 0)) {
                 this.setDirection(3)
             }
 
-            if (this.getDirection() === 3 && (this.getY() < (alturaCanva - this.getTamnhoDoObservador()))) {
+            if (this.getDirection() == 3 && (this.getY() < (alturaCanva - this.getTamnhoDoObservador()))) {
                 this.setY(this.getSpeed())
             }
 
-            if (this.getDirection() === 3 && (this.getY() > (alturaCanva - this.getTamnhoDoObservador()))) {
+            if (this.getDirection() == 3 && (this.getY() > (alturaCanva - this.getTamnhoDoObservador()))) {
                 this.setDirection(2)
             }
 
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             for (let contador = 0; contador < (observadores.length); contador++) {
                 context.beginPath()
-                context.fillRect(observadores[contador].getX(), parseInt(observadores[contador].getY()), 20, 20)
+                context.rect(observadores[contador].getX(), parseInt(observadores[contador].getY()), 20, 20)
                 context.fillStyle = observadores[contador].cor
                 context.fill()
             }
