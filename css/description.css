@@ -1,3 +1,12 @@
+* {
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 1.5;
+  font-family: sans-serif;
+  border-radius: none;
+  color: #0c0c0c;
+}
+
 body .container {
   max-width: 80%;
   margin: 0 auto;
@@ -25,7 +34,7 @@ body main .linkIndex {
   padding: 0.5rem 2rem;
 }
 
-body .linkIndex{
+body .linkIndex {
   cursor: pointer;
   background-color: #dcdcdc;
   border: none;
@@ -47,7 +56,6 @@ body main .fa-arrow-left {
   display: inline-block;
   margin-right: 0.5rem;
 }
-
 
 body main .imagens {
   padding: 0.5rem;
