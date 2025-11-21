@@ -99,31 +99,31 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         correr() {
-            if (this.direction === 0) {
-                this.setX(this.speed);
-                if (this.getX() + this.getTamnhoDoObservador() > larguraCanva) {
-                    this.direction = 1;
+            if (this.getDirection() === 0) {
+                this.setX(this.getSpeed());
+                if (this.getX() >= larguraCanva) {
+                    this.setDirection(1);
                 }
             }
 
-            else if (this.direction === 1) {
+            else if (this.getDirection() === 1) {
                 this.setX(-this.speed);
                 if (this.getX() <= 0) {
-                    this.direction = 0;
+                    this.setDirection(0);
                 }
             }
 
-            else if (this.direction === 2) {
-                this.setY(-this.speed);
+            else if (this.getDirection() === 2) {
+                this.setY(-this.getSpeed());
                 if (this.getY() <= 0) {
-                    this.direction = 3;
+                    this.setDirection(3);
                 }
             }
 
-            else if (this.direction === 3) {
-                this.setY(this.speed);
-                if (this.getY() + this.getTamnhoDoObservador() >= alturaCanva) {
-                    this.direction = 2;
+            else if (this.getDirection() === 3) {
+                this.setY(this.getSpeed());
+                if (this.getY() >= alturaCanva) {
+                    this.setDirection(2);
                 }
             }
         }
