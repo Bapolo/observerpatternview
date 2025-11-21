@@ -1,198 +1,179 @@
-document.addEventListener("DOMContentLoaded", () => 
-{
-    class Observado
-    {
-        constructor()
-        {
+document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.querySelector("#canvas")
+    const context = canvas.getContext("2d")
+
+    const larguraCanva = canvas.width
+    const alturaCanva = canvas.height
+
+    class Observado {
+        constructor() {
             this.observadores = []
         }
 
-        addObservador(observador)
-        {
+        addObservador(observador) {
 
             this.tocarEfeitoSonoro("./efeitosSonoros/efeitoCriar.mp3")
             this.observadores.push(observador)
-            
+
         }
 
-        removeObservador()
-        {
-            if (this.observadores.length > 0)
-            {
+        removeObservador() {
+            if (this.observadores.length > 0) {
                 this.tocarEfeitoSonoro("./efeitosSonoros/efeitoRemover.wav")
-                this.observadores.pop()            
+                this.observadores.pop()
             }
-            
+
         }
 
-        notificarObservadores(notificacao)
-        {
-            if (this.observadores.length >  0)
-            {
-                this.observadores.forEach((observador) =>
-                {
+        notificarObservadores(notificacao) {
+            if (this.observadores.length > 0) {
+                this.observadores.forEach((observador) => {
                     observador.receberNotificacaoDoObservado(notificacao)
                 })
-            }           
+            }
         }
 
-        getObservadores()
-        {
+        getObservadores() {
             return this.observadores
         }
 
-        tocarEfeitoSonoro(srcDoSom)
-        {
-            const efeitoSonoro = new Audio(srcDoSom) 
+        tocarEfeitoSonoro(srcDoSom) {
+            const efeitoSonoro = new Audio(srcDoSom)
 
             efeitoSonoro.play()
         }
 
     }
 
-    class Observador{
-        
-        constructor()
-        {
-            this.observadorQuadrado = 5          
+    class Observador {
+
+        constructor() {
+
+            this.observadorQuadrado = 20
 
             this.positionX = Math.round(Math.random() * (canvas.width - this.observadorQuadrado))
 
             this.positionY = Math.round(Math.random() * (canvas.height - this.observadorQuadrado))
 
-            this.cor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${ Math.floor(Math.random() * 256)})`
+            this.cor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`
 
-            this.speed = 10
+            this.speed = this.getTamnhoDoObservador()
             this.direction = Math.round(Math.random() * 3)
+            console.log(this.direction)
         }
 
-        getX()
-        {
+        getTamnhoDoObservador() {
+            return this.observadorQuadrado
+        }
+
+        getX() {
             return this.positionX
         }
 
-        getY()
-        {
+        getY() {
             return this.positionY
         }
 
-        receberNotificacaoDoObservado(notificacao)
-        {
-            this.correr()            
+        setX(valor) {
+            this.positionX += valor
         }
 
-        correr()
-        {
-            if (this.direction === 0)
-            {
-                this.positionX -= this.speed
+        setY(valor) {
+            this.positionY += valor
+        }
 
-                if (this.positionX <= 0)
-                {
-                    this.direction = 1
-                }
-            }
-            
-            if (this.direction === 1)
-            {
-                this.positionX += this.speed
+        getDirection() {
+            return this.direction
+        }
 
-                if (this.positionX >= canvas.width - this.observadorQuadrado)
-                {
-                    this.direction = 0
-                }
-            }
-            
-            if (this.direction === 2)
-            {
-                this.positionY -= this.speed
+        setDirection(newDirection) {
+            this.direction = newDirection
+        }
 
-                if (this.positionY <= 0)
-                {
-                    this.direction = 3
-                }
-            }
-            
-            if (this.direction === 3)
-            {
-                this.positionY += this.speed
+        getSpeed() {
+            return this.speed
+        }
 
-                if (this.positionY >= canvas.height - this.observadorQuadrado)
-                {
-                    this.direction = 2
-                }
-            }
-            
-            
+        setSpeed(valor) {
+            this.speed = valor
+        }
 
-            if (this.positionX < 0)
-            {
-                this.positionX = 0
-            }
-            
-            if (this.positionX > canvas.width - this.observadorQuadrado)
-            {
-                this.positionX = canvas.width - this.observadorQuadrado
+        receberNotificacaoDoObservado(notificacao) {
+            this.correr()
+        }
+
+        correr() {
+            if (this.getDirection() === 0 && (this.getX() < (larguraCanva - this.getTamnhoDoObservador()))) {
+                this.setX(this.getSpeed())
             }
 
-            if (this.positionY < 0)
-            {
-                this.positionY = 0
+            if (this.getDirection() === 0 && (this.getX() >= (larguraCanva - this.getTamnhoDoObservador()))) {
+                this.setDirection(1)
             }
-            
-            if (this.positionY > canvas.height - this.observadorQuadrado)
-            {
-                this.positionY = canvas.height - this.observadorQuadrado
-            }
-           
 
-        } 
+            if (this.direction === 1 && (this.getX() > 0)) {
+                this.setX(-this.getSpeed())
+            }
+
+            if (this.getDirection() === 1 && (this.getX() <= 0)) {
+                this.setDirection(0)
+            }
+
+            if (this.getDirection() === 2 && (this.getY() > 0)) {
+                this.setY(-this.getSpeed())
+            }
+
+            if (this.getDirection() === 2 && (this.getY() <= 0)) {
+                this.setDirection(3)
+            }
+
+            if (this.getDirection() === 3 && (this.getY() < (alturaCanva - this.getTamnhoDoObservador()))) {
+                this.setY(this.getSpeed())
+            }
+
+            if (this.getDirection() === 3 && (this.getY() >= (alturaCanva - this.getTamnhoDoObservador()))) {
+                this.setDirection(2)
+            }
+
+            console.log(larguraCanva - this.getTamnhoDoObservador())
+
+        }
 
     }
 
     const objectoObservado = new Observado()
 
-    document.querySelector("#btnCriarObservador").addEventListener("click", () =>
-    {
+    document.querySelector("#btnCriarObservador").addEventListener("click", () => {
         const observador = new Observador()
         objectoObservado.addObservador(observador)
-       
+
     })
 
-    document.querySelector("#btnEliminarObservador").addEventListener("click", () => 
-    {
+    document.querySelector("#btnEliminarObservador").addEventListener("click", () => {
         objectoObservado.removeObservador()
     })
 
-    document.querySelector("#btnNotificar").addEventListener("click", () => 
-    {
+    document.querySelector("#btnNotificar").addEventListener("click", () => {
         objectoObservado.notificarObservadores("Corram")
     })
-    
-    const canvas = document.querySelector("#canvas")
-    const context = canvas.getContext("2d")   
 
-    function draw()
-    {
+    function draw() {
         const observadores = objectoObservado.getObservadores()
-        
-        if (observadores.length >= 0)
-        {
+
+        if (observadores.length >= 0) {
             context.clearRect(0, 0, canvas.width, canvas.height)
 
-            for (let contador = 0; contador < (observadores.length); contador++)
-            {
-                
+            for (let contador = 0; contador < (observadores.length); contador++) {
                 context.beginPath()
-                context.rect(parseInt(observadores[contador].positionX), observadores[contador].positionY, observadores[contador].observadorQuadrado, observadores[contador].observadorQuadrado)
+                context.fillRect(observadores[contador].getX(), parseInt(observadores[contador].getY()), 20, 20)
                 context.fillStyle = observadores[contador].cor
                 context.fill()
             }
         }
-        
-        window.requestAnimationFrame(draw)        
+
+        window.requestAnimationFrame(draw)
     }
 
-    draw()   
-    
+    draw()
+
 })
