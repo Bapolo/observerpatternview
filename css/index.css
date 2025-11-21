@@ -1,7 +1,5 @@
 *
 {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
     font-size: 16px;
     line-height: 1.5;
@@ -14,7 +12,6 @@
 body h1
 {
     text-align: center;
-    padding: 0.5rem;
     font-size: 2rem;
     font-weight: 200;
 }
@@ -42,7 +39,7 @@ body #canvas
 {
     display: block;
     max-width: 95%;
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: solid rgba(0, 0, 0, 0.5);
     margin: 0 auto;
 }
 

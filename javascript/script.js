@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         constructor() {
 
-            this.observadorQuadrado = 20
+            this.observadorQuadrado = 10
 
             this.positionX = Math.round(Math.random() * (canvas.width - this.observadorQuadrado))
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             this.cor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`
 
-            this.speed = this.getTamnhoDoObservador()
+            this.speed = this.getTamnhoDoObservador() * 2
             this.direction = Math.round(Math.random() * 3)
             console.log(this.direction)
         }
@@ -94,10 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return this.speed
         }
 
-        setSpeed(valor) {
-            this.speed = valor
-        }
-
         receberNotificacaoDoObservado(notificacao) {
             this.correr()
         }
@@ -105,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         correr() {
             if (this.direction === 0) {
                 this.setX(this.speed);
-                if (this.getX() + this.getTamnhoDoObservador() >= larguraCanva) {
+                if (this.getX() + this.getTamnhoDoObservador() > larguraCanva) {
                     this.direction = 1;
                 }
             }
