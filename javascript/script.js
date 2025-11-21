@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function draw() {
         const listaObservadores = [...objectoObservado.getObservadores()]
 
-        if (listaObservadores.length > 0) {
+        if (listaObservadores.length >= 0) {
 
             context.clearRect(0, 0, canvas.width, canvas.height)
 
